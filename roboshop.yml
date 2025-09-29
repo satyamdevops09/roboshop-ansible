@@ -1,3 +1,7 @@
 
-
+- name: Frontend playbook1
+  hosts: all
+  become: true
+  roles:
+    - "{{ role_name }}"
 
