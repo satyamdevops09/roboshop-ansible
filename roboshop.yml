@@ -1,4 +1,4 @@
-- name: Frontend playbook1
+- name: Roboshop playbook1
   hosts: all
   become: true
   roles:
