@@ -1,0 +1,27 @@
+#dnf install maven -y
+#cp ${component}.service /etc/systemd/system/${component}.service
+#APP_PREREQ
+#mvn clean package
+#mv target/${component}-1.0.jar ${component}.jar
+#SYSTEMD
+
+- name: install maven
+  ansible.builtin.dnf:
+    name: maven
+    state: installed
+
+
+- name: load apprereq
+  ansible.builtin.import_role:
+    name: common
+    task-form: app_prereq
+
+- name: Download Dependencies
+  ansible.builtin.shell: mv target/{{component}}-1.0.jar {{component}}.jar
+  args:
+    chdir: /app
+
+- name: restart service
+  ansible.builtin.import_role:
+    name: common
+    task-form: systemd
