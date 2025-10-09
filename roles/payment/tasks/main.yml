@@ -1,0 +1,7 @@
+#source common.sh
+#component=payment
+#PYTHON
+- name: load Python
+  ansible.builtin.import_role:
+    name: common
+    task-form: python

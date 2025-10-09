@@ -1,0 +1,32 @@
+#  PYTHON(){
+#    dnf install python3 gcc python3-devel -y
+#    APP_PREREQ
+#    pip3 install -r requirements.txt
+#    SYSTEMD
+#  }
+
+
+
+- name: install python
+  ansible.builtin.dnf:
+    name:
+      - python3
+      - gcc
+      - python3-devel
+    state: installed
+
+
+- name: load apprereq
+  ansible.builtin.import_role:
+    name: common
+    task-form: app_prereq
+
+- name: Download Dependencies
+  ansible.builtin.shell: pip3 install -r requirements.txt
+  args:
+    chdir: /app
+
+- name: restart service
+  ansible.builtin.import_role:
+    name: common
+    task-form: systemd
