@@ -6,7 +6,7 @@
 - name: Install mongodb
   ansible.builtin.dnf:
     name: mongodb-org
-    status: installed
+    state: installed
 
 - name: Replace listen addressed in mongodb
   ansible.builtin.replace:
