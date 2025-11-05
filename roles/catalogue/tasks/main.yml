@@ -9,7 +9,7 @@
 - name: Load nodejs
   ansible.builtin.import_role:
     name: common
-    tasks_form: nodejs
+    tasks_from: nodejs
 - name: copy MongoDB repo file
   ansible.builtin.copy:
     src: mongo.repo
