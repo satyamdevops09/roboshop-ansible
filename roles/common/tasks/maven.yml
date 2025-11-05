@@ -21,7 +21,7 @@
   args:
     chdir: /app
 
-- name: restart service
+- name: Load SystemD service
   ansible.builtin.import_role:
     name: common
     tasks_from: systemd
