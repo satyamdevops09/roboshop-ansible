@@ -11,7 +11,7 @@
 - name: Install nodejs
   ansible.builtin.dnf:
     name: nodejs
-    status: installed
+    state: installed
 - name: load apprereq
   ansible.builtin.import_role:
     name: common
