@@ -7,7 +7,7 @@
 #}
 
 - name: Copy component service file
-  ansible.bulitin.copy:
+  ansible.builtin.copy:
     src: "{{component}}.service"
     dest: /etc/systemd/system/${{component}}.service
 
