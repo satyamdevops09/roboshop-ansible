@@ -19,7 +19,7 @@
 - name: load apprereq
   ansible.builtin.import_role:
     name: common
-    task-form: app_prereq
+    tasks_from: app_prereq
 
 - name: Download Dependencies
   ansible.builtin.shell: pip3 install -r requirements.txt
@@ -29,4 +29,4 @@
 - name: restart service
   ansible.builtin.import_role:
     name: common
-    task-form: systemd
+    tasks_from: systemd
