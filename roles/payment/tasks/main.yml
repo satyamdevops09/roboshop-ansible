@@ -4,4 +4,4 @@
 - name: load Python
   ansible.builtin.import_role:
     name: common
-    task-form: python
+    tasks_from: python
