@@ -26,5 +26,6 @@
     name: common
     tasks_from: systemd
 
+# When we want to use task's from same role we can use import task's as below instead of above usage
 #- name: restart service
 #  ansible.builtin.import_tasks: systemd.yml
