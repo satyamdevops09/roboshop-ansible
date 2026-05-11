@@ -27,4 +27,4 @@
 #    tasks_from: systemd
 
 - name: restart service
-  ansible.builtin.import_task: systemd.yml
+  ansible.builtin.import_tasks: systemd.yml
