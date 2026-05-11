@@ -21,10 +21,10 @@
   args:
     chdir: /app
 
-#- name: restart service
-#  ansible.builtin.import_role:
-#    name: common
-#    tasks_from: systemd
-
 - name: restart service
-  ansible.builtin.import_tasks: systemd.yml
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd
+
+#- name: restart service
+#  ansible.builtin.import_tasks: systemd.yml
