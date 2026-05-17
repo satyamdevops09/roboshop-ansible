@@ -13,25 +13,25 @@
 #done
 
 
-- name: Load Maven
-  ansible.builtin.import_role:
-    name: common
-    tasks_from: maven
-
-- name: Install Mysql Client
-  ansible.builtin.dnf:
-    name: mysql
-    state: installed
-
-- name: Load schema
-  ansible.builtin.shell: mysql -h mysql-dev.sdevops09.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/shipping:DB_USER token={{ token }} url=http://vault-internal.sdevops09.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/shipping:DB_PASS token={{ token }} url=http://vault-internal.sdevops09.online:8200') }} < /app/db/{{ item }}.sql
-  loop:
-    - schema
-    - app-user
-    - master-data
-
-#- name: Load schema
-#  ansible.builtin.shell: mysql -h mysql-dev.sdevops09.online -uroot -pRoboShop@1 < /app/db/app-user.sql
+#- name: Load Maven
+#  ansible.builtin.import_role:
+#    name: common
+#    tasks_from: maven
+#
+#- name: Install Mysql Client
+#  ansible.builtin.dnf:
+#    name: mysql
+#    state: installed
 #
 #- name: Load schema
-#  ansible.builtin.shell: mysql -h mysql-dev.sdevops09.online -uroot -pRoboShop@1 < /app/db/master-data.sql
+#  ansible.builtin.shell: mysql -h mysql-dev.sdevops09.online -u{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/shipping:DB_USER token={{ token }} url=http://vault-internal.sdevops09.online:8200') }} -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{env}}/data/shipping:DB_PASS token={{ token }} url=http://vault-internal.sdevops09.online:8200') }} < /app/db/{{ item }}.sql
+#  loop:
+#    - schema
+#    - app-user
+#    - master-data
+
+- name: Load Docker
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: docker
+

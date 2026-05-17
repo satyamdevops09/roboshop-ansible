@@ -6,19 +6,24 @@
 #mongosh --host mongodb-dev.sdevops09.online </app/db/master-data.js
 
 
-- name: Load nodejs
+#- name: Load nodejs
+#  ansible.builtin.import_role:
+#    name: common
+#    tasks_from: nodejs
+#- name: copy MongoDB repo file
+#  ansible.builtin.copy:
+#    src: mongo.repo
+#    dest: /etc/yum.repos.d/mongo.repo
+#
+#- name: install mongodb
+#  ansible.builtin.dnf:
+#    state: installed
+#    name: mongodb-mongosh
+#
+#- name: Load schema
+#  ansible.builtin.shell: mongosh --host mongodb-dev.sdevops09.online </app/db/master-data.js
+
+- name: Load Docker
   ansible.builtin.import_role:
     name: common
-    tasks_from: nodejs
-- name: copy MongoDB repo file
-  ansible.builtin.copy:
-    src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
-
-- name: install mongodb
-  ansible.builtin.dnf:
-    state: installed
-    name: mongodb-mongosh
-
-- name: Load schema
-  ansible.builtin.shell: mongosh --host mongodb-dev.sdevops09.online </app/db/master-data.js
+    tasks_from: docker

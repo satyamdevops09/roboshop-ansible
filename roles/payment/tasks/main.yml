@@ -1,7 +1,12 @@
 #source common.sh
 #component=payment
 #PYTHON
-- name: load Python
+#- name: load Python
+#  ansible.builtin.import_role:
+#    name: common
+#    tasks_from: python
+
+- name: Load Docker
   ansible.builtin.import_role:
     name: common
-    tasks_from: python
+    tasks_from: docker
