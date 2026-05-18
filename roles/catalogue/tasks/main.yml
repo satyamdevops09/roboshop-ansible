@@ -30,7 +30,7 @@
 
 - name: Launch Docker Container
   community.docker.docker_container:
-    name: frontend
+    name: catalogue
     image: public.ecr.aws/w8x4g9h7/roboshop-v3/catalogue
     ports:
       - "8080:8080"
@@ -40,8 +40,8 @@
 
 - name: Schema Container
   community.docker.docker_container:
-    name: catalogue
-    image: public.ecr.aws/w8x4g9h7/roboshop-v3/catalogue
+    name: catalogue-schema
+    image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
     ports:
       - "8080:8080"
     env:
