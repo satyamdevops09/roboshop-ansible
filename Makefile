@@ -5,4 +5,4 @@ default:
 
 tool:
 	git pull
-	ansible-playbook -i $(tool_name)-internal.sdevops09.shop, -e ansible_user=ec2-user -e ansible_password=DevOps321 roboshop.yml -e role_name=$(tool_name)
+	ansible-playbook -i $(tool_name)-internal.sdevops09.shop, -e ansible_user=ec2-user -e ansible_password=DevOps321 roboshop.yml -e role_name=$(tool_name) -e vault_token=$(token)
