@@ -2,4 +2,4 @@ runner_version: 2.336.0
 # Change this as per your Org Name
 github_org_name: satyamdevops09
 # Change this as per your DNS Name
-vault_url: "http://vault-internal.rdevopsb85.online:8200"
+vault_url: "http://vault-internal.sdevops09.shop:8200"
