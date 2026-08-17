@@ -65,7 +65,7 @@
     state: started
     enabled: yes
 
-- name: Add User to Docker Group
+- name: Add Docker to User Group
   ansible.builtin.user:
     name: github-runner
     groups: docker
