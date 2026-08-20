@@ -69,3 +69,14 @@
   ansible.builtin.user:
     name: github-runner
     groups: docker
+
+- name: Install nodejs
+  ansible.builtin.shell: |
+    dnf module disable nodejs -y
+    dnf module enable nodejs:24 -y
+
+- name: Instaall app packages
+  ansible.builtin.dnf:
+    name:
+      - nodejs
+      - maven
