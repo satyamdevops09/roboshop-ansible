@@ -8,3 +8,4 @@
     vg: "{{item.vgname}}"
     lv: "{{item.lvm_name}}"
     size: "{{item.size}}"
+    resizefs: true
