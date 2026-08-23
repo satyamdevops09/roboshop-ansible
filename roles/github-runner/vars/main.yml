@@ -6,7 +6,7 @@ vault_url: "http://vault-internal.sdevops09.shop:8200"
 
 lvm_disks:
   - {vgname: RootVG , lvm_name: auditVol , size: 4.40g }
-  - {vgname: RootVG , lvm_name: homeVol  , size: 6g }
+  - {vgname: RootVG , lvm_name: homeVol  , size: 3g }
   - {vgname: RootVG , lvm_name: logVol  , size: 2g }
   - {vgname: RootVG , lvm_name: rootVol  , size: 10g }
   - {vgname: RootVG , lvm_name: swapVol , size: 2g }
