@@ -24,14 +24,20 @@
     name: libicu
     state: installed
 
+- name: Check runner configuration
+  ansible.builtin.stat:
+    path: /github-runner/.runner
+  register: runner_configuration
+
 - name: Configure runner
-  ansible.builtin.shell: ./config.sh --url https://github.com/{{ github_org_name }} --token {{ token }} --runnergroup Default --name github-runner --labels self-hosted --work _work --replace
+  ansible.builtin.shell: ./config.sh --url https://github.com/{{ github_org_name }} --token {{ token | quote }} --runnergroup Default --name github-runner --labels self-hosted --work _work --replace
   args:
     chdir: /github-runner
   become_user: github-runner
   vars:
-    token: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url={{ vault_url }}') }}"
-  ignore_errors: yes
+    token: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:RUNNER_TOKEN token=' ~ vault_token ~ ' url=' ~ vault_url) }}"
+  when: not runner_configuration.stat.exists
+  no_log: true
 
 - name: Copy Service
   ansible.builtin.template:
