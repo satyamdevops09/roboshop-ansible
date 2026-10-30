@@ -48,31 +48,42 @@
 
 
 - name: Configure runner
-  ansible.builtin.command:
-    argv:
-      - ./config.sh
-      - --url
-      - https://github.com/{{ github_org_name }}
-      - --token
-      - "{{ token }}"
-      - --runnergroup
-      - Default
-      - --name
-      - github-runner
-      - --labels
-      - self-hosted
-      - --work
-      - _work
-      - --replace
-  args:
-    chdir: /github-runner
+  block:
+    - name: Register runner with GitHub
+      ansible.builtin.command:
+        argv:
+          - ./config.sh
+          - --url
+          - https://github.com/{{ github_org_name }}
+          - --token
+          - "{{ token }}"
+          - --runnergroup
+          - Default
+          - --name
+          - github-runner
+          - --labels
+          - self-hosted
+          - --work
+          - _work
+          - --replace
+      args:
+        chdir: /github-runner
+      register: runner_config_result
+      failed_when: false
+      no_log: yes
+
+    - name: Report runner configuration failure
+      ansible.builtin.fail:
+        msg: >-
+          Runner configuration failed (rc={{ runner_config_result.rc }}):
+          {{ ((runner_config_result.stderr | default('')) ~ ' ' ~
+          (runner_config_result.stdout | default(''))) |
+          replace(token | default('[empty runner token]', true), '[REDACTED]') }}
+      when: runner_config_result.rc != 0
   become_user: github-runner
   vars:
     token: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:RUNNER_TOKEN token=' ~ vault_token ~ ' url=' ~ vault_url) }}"
   when: not runner_config.stat.exists
-  no_log: yes
-
-
 
 
 - name: Copy Service
@@ -155,8 +166,6 @@
       - nodejs
       - maven
       - npm
-
-
 
 
 
