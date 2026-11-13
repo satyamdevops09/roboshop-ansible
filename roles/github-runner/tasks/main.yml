@@ -55,15 +55,18 @@
 
 - name: Runner container
   community.docker.docker_container:
-    name: runner1
+    name: "{{ item }}"
     image: 479363499437.dkr.ecr.us-east-1.amazonaws.com/runner:latest 
     state: started
     recreate: true
     env:
-      NAME: runner1
+      NAME: "{{ item }}"
       ORG:  "https://github.com/satyamdevops09"
       TOKEN: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:RUNNER_TOKEN token=' ~ vault_token ~ ' url=' ~ vault_url) }}"
-
+      loop:
+        -runner1
+        -runner2
+        -runner3
 
 # - name: Download runner software
 #   ansible.builtin.unarchive:
