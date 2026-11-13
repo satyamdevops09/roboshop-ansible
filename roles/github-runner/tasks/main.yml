@@ -41,11 +41,14 @@
     home: /github-runner
     groups: docker
 
+- name: Install Python pip
+  ansible.builtin.dnf:
+    name: python3-pip
+    state: installed
+
 - name: Hvac python module
   ansible.builtin.pip:
     name: hvac
-    executable: pip3.13
-   
 
 - name: Login to ECR
   ansible.builtin.shell: /usr/local/bin/aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 479363499437.dkr.ecr.us-east-1.amazonaws.com
