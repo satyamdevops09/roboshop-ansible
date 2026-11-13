@@ -17,7 +17,7 @@
   ignore_errors: yes
 
 - name : Run From Scratch
-  when : out.failed is defined
+  when : out.failed is defined and out.failed
   block:
     - name: Set Prompt
       ansible.builtin.shell: set-prompt github-runner
