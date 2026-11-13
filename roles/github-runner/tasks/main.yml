@@ -59,6 +59,7 @@
     image: 479363499437.dkr.ecr.us-east-1.amazonaws.com/runner:latest 
     state: started
     recreate: true
+    pull: always
     env:
       NAME: "{{ item }}"
       ORG:  "https://github.com/satyamdevops09"
