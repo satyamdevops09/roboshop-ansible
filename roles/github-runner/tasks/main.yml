@@ -59,7 +59,7 @@
     image: 479363499437.dkr.ecr.us-east-1.amazonaws.com/github-runner:latest
     state: present
     recreate: true
-    environment:
+    env:
       NAME: runner1
       ORG:  "https://github.com/satyamdevops09"
       TOKEN: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:RUNNER_TOKEN token=' ~ vault_token ~ ' url=' ~ vault_url) }}"
