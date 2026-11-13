@@ -57,7 +57,7 @@
   community.docker.docker_container:
     name: runner1
     image: 479363499437.dkr.ecr.us-east-1.amazonaws.com/runner:latest 
-    state: present
+    state: started
     recreate: true
     env:
       NAME: runner1
