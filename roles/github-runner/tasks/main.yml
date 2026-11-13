@@ -64,9 +64,9 @@
       ORG:  "https://github.com/satyamdevops09"
       TOKEN: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:RUNNER_TOKEN token=' ~ vault_token ~ ' url=' ~ vault_url) }}"
       loop:
-        -runner1
-        -runner2
-        -runner3
+        - runner1
+        - runner2
+        - runner3
 
 # - name: Download runner software
 #   ansible.builtin.unarchive:
