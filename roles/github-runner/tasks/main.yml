@@ -5,6 +5,8 @@
     state: started
     recreate: true
     pull: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     env:
       NAME: "{{ item }}"
       ORG:  "https://github.com/satyamdevops09"
@@ -68,6 +70,8 @@
         state: started
         recreate: true
         pull: always
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
         env:
           NAME: "{{ item }}"
           ORG:  "https://github.com/satyamdevops09"
