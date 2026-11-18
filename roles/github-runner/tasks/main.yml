@@ -10,6 +10,7 @@
     state: started
     recreate: true
     pull: always
+    restart_policy: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     groups: "{{ [docker_socket_stat.stat.gid | string] if docker_socket_stat.stat.exists else [] }}"
@@ -81,6 +82,7 @@
         state: started
         recreate: true
         pull: always
+        restart_policy: always
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
         groups: "{{ [docker_socket_stat.stat.gid | string] }}"
