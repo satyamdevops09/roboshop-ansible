@@ -1,3 +1,8 @@
+- name: Read Docker socket group ID
+  ansible.builtin.stat:
+    path: /var/run/docker.sock
+  register: docker_socket_stat
+
 - name: Runner container
   community.docker.docker_container:
     name: "{{ item }}"
@@ -7,6 +12,7 @@
     pull: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    groups: "{{ [docker_socket_stat.stat.gid | string] if docker_socket_stat.stat.exists else [] }}"
     env:
       NAME: "{{ item }}"
       ORG:  "https://github.com/satyamdevops09"
@@ -45,6 +51,11 @@
         state: started
         enabled: yes
 
+    - name: Read Docker socket group ID
+      ansible.builtin.stat:
+        path: /var/run/docker.sock
+      register: docker_socket_stat
+
     - name: Add github runner user
       ansible.builtin.user:
         name: github-runner
@@ -72,6 +83,7 @@
         pull: always
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
+        groups: "{{ [docker_socket_stat.stat.gid | string] }}"
         env:
           NAME: "{{ item }}"
           ORG:  "https://github.com/satyamdevops09"
