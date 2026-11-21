@@ -3,6 +3,10 @@
     path: /var/run/docker.sock
   register: docker_socket_stat
 
+- name: Login to ECR
+  ansible.builtin.shell: /usr/local/bin/aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 479363499437.dkr.ecr.us-east-1.amazonaws.com
+  when: docker_socket_stat.stat.exists
+
 - name: Runner container
   community.docker.docker_container:
     name: "{{ item }}"
